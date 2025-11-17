@@ -4,23 +4,43 @@
 
 Nosso sistema de recomendação leva em conta alguns pontos acerca dos pratos escolhidos pelos usuários para fazer uma sugestão acertiva que combine perfeitamente.
 
-**Como rodar**
+## Instalação e execução (fluxo recomendado)
 
-* Clone o repositório:
+1) Clonar o repositório:
 
-`git clone -project address`
+```bash
+git clone <url do repositório>
+```
 
-* Caso não tenha o Flask instalado, rode:
+2) Criar e ativar um ambiente virtual (recomendado para não gerar conflitos):
 
-`python -m pip install flask`
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-* Dê os seguintes comandos:
+3) Instalar dependências:
 
-`python -m pip install google-generativeai`
+```bash
+pip install flask streamlit google-generativeai
+```
 
-`streamlit run site_vinhos.py`
+4) Executar a aplicação:
 
-`python app.py`
+# Rodar a app Flask (padrão do projeto):
+```bash
+python app.py
+```
+
+# Rodar a interface Streamlit (se for usá-la):
+```bash
+streamlit run site_vinhos.py
+```
+
+
+
+
+
 
 
 
