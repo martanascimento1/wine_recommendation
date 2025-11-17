@@ -17,7 +17,9 @@ Nosso sistema de recomendação leva em conta alguns pontos acerca dos pratos es
 * Dê os seguintes comandos:
 
 `python -m pip install google-generativeai`
+
 `streamlit run site_vinhos.py`
+
 `python app.py`
 
 
