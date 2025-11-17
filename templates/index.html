@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Sommelier AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Le Sommelier AI</h1>
+            <p class="subtitle">As melhores dicas para vinhos</p>
+        </header>
+
+        <main>
+            <div class="cardapio-box">
+                <h2>Qual será o seu pedido?</h2>
+                <form method="POST" action="/">
+                    <input type="text" name="prato" placeholder="Ex: Risoto de Parmesão Trufado..." value="{{ prato }}" required>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+
+            {% if recomendacao %}
+            <div class="resultado-box">
+                <div class="selo">Sugestão do Chef</div>
+                <div class="texto-recomendacao">
+                    {{ recomendacao | safe }}
+                </div>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+
+</body>
+</html>
