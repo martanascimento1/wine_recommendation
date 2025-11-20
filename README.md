@@ -16,13 +16,21 @@ git clone <url do repositório>
 
 ```bash
 python3 -m venv .venv
+```
+```bash 
 source .venv/bin/activate
 ```
 
 3) Instalar dependências:
 
 ```bash
-pip install flask streamlit google-generativeai
+pip install flask 
+```
+```bash
+pip install streamlit
+```
+```bash
+pip install google-generativeai
 ```
 
 4) Executar a aplicação:
@@ -30,11 +38,6 @@ pip install flask streamlit google-generativeai
 # Rodar a app Flask (padrão do projeto):
 ```bash
 python app.py
-```
-
-# Rodar a interface Streamlit (se for usá-la):
-```bash
-streamlit run site_vinhos.py
 ```
 
 
