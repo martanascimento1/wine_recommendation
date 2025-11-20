@@ -35,7 +35,6 @@ pip install google-generativeai
 
 4) Executar a aplicação:
 
-# Rodar a app Flask (padrão do projeto):
 ```bash
 python app.py
 ```
