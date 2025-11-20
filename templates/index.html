@@ -13,14 +13,27 @@
         <header>
             <h1>Wine sommelier</h1>
             <p class="subtitle">As melhores sugestões de vinhos para acompanhar seu prato</p>
+
+            <!-- 🔗 Link para o Histórico -->
+            <nav class="menu-links">
+                <a href="/historico">Ver histórico de pratos</a>
+            </nav>
         </header>
 
         <main>
             <div class="cardapio-box">
                 <h2>Qual será o seu pedido?</h2>
+
+                <!-- 🔁 Formulário que permite enviar novo prato -->
                 <form method="POST" action="/">
-                    <input type="text" name="prato" placeholder="Ex: Risoto de Parmesão Trufado..." value="{{ prato }}" required>
-                    <button type="submit">Enviar</button>
+                    <input 
+                        type="text" 
+                        name="prato" 
+                        placeholder="Ex: Risoto de Parmesão Trufado..." 
+                        value="{{ prato }}" 
+                        required
+                    >
+                    <button type="submit">Enviar prato</button>
                 </form>
             </div>
 
@@ -29,6 +42,11 @@
                 <div class="selo">Sugestão do Chef</div>
                 <div class="texto-recomendacao">
                     {{ recomendacao | safe }}
+                </div>
+
+                <!-- 🔁 Botão para digitar outro prato de forma clara -->
+                <div class="novo-prato-btn">
+                    <a href="/" class="btn-novo-prato">Consultar outro prato</a>
                 </div>
             </div>
             {% endif %}

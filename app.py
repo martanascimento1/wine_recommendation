@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
 import google.generativeai as genai
 import json
 import os
 
 app = Flask(__name__)
+import os
+app.secret_key = os.urandom(24)
 
 API_KEY = "AIzaSyDIbZMuVb3k4nxsEJJYNGC3VnuFcEH2OMQ"
 genai.configure(api_key=API_KEY)
@@ -64,30 +66,54 @@ def gerar_recomendacao_html(prato, lista_vinhos):
     Atue como um Sommelier. O cliente vai comer: "{prato}".
     Vinhos disponíveis: {lista_texto}
     
-    Escreva um texto curto, elegante e persuasivo recomendando o melhor vinho.
+    Escreva um texto curto (bastante resumido e direto), elegante e persuasivo recomendando o melhor vinho.
     Use tags HTML para formatar: use <h3> para o nome do vinho, <p> para o texto e <strong> para destaque.
     Não use Markdown, use apenas HTML.
     """
     response = model.generate_content(prompt)
     return response.text
 
+def registrar_historico(prato, recomendacao):
+    if "historico" not in session:
+        session["historico"] = []
+    session["historico"].append({
+        "prato": prato,
+        "recomendacao": recomendacao
+    })
+    session.modified = True
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     recomendacao = ""
     prato_digitado = ""
-    
+
     if request.method == 'POST':
         prato_digitado = request.form.get('prato')
         adega = carregar_adega()
-        
+
         # 1. IA Analisa
         caracteristicas = analisar_prato_com_ia(prato_digitado)
         # 2. Filtra
         vinhos = filtrar_vinhos(caracteristicas, adega)
         # 3. Recomenda
         recomendacao = gerar_recomendacao_html(prato_digitado, vinhos)
-        
+
+        # 4. Salvar no histórico
+        registrar_historico(prato_digitado, recomendacao)
+
     return render_template('index.html', recomendacao=recomendacao, prato=prato_digitado)
+
+@app.route('/historico')
+def ver_historico():
+    historico = session.get("historico", [])
+    return render_template('historico.html', historico=historico)
+
+@app.route('/limpar_historico')
+def limpar_historico():
+    session.pop("historico", None)
+    return redirect(url_for('ver_historico'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

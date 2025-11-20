@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico de Consultas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Histórico de Pratos</h1>
+        <p class="subtitle">Veja o que já foi consultado</p>
+
+        <nav class="menu-links">
+            <a href="/">Voltar à página inicial</a>
+        </nav>
+    </header>
+
+    {% if historico %}
+        <div class="resultado-box">
+            {% for item in historico %}
+                <div style="margin-bottom: 30px; text-align: left;">
+                    <h3 style="color: #722f37;">🍽 Prato: {{ item.prato }}</h3>
+                    <div>{{ item.recomendacao | safe }}</div>
+                    <hr style="margin-top: 20px;">
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nenhum prato consultado ainda.</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
